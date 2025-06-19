@@ -1,0 +1,47 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+{{ movie.movie_title }} | Cinematica
+{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/movie_detail.css')}}">
+{% endblock %}
+{% block content %}
+<section class="movie-details-page">
+  <div class="movie-details-container">
+    <div class="movie-header">
+      <h1 class="movie-title">{{ movie.movie_title }}</h1>
+      <div class="movie-meta">
+        <span class="movie-rating">
+          <i class="fas fa-star"></i> {{ movie.movie_rating }} (Кинопоиск)
+        </span>
+        <span class="movie-year">
+          <i class="fas fa-calendar-alt"></i> {{ movie.movie_date }}
+        </span>
+        <span class="movie-country">
+          <i class="fas fa-flag"></i> {{ movie.movie_country }}
+        </span>
+        <span class="movie-genre">
+          <i class="fas fa-film"></i> {{ movie.movie_genre }}
+        </span>
+      </div>
+    </div>
+
+    <div class="movie-description">
+      <h2 class="section-title">Описание</h2>
+      <p>{{ movie.movie_description }}</p>
+    </div>
+
+    <div class="movie-link">
+      <a href="{{ url_for('movie', movie_id=movie.movie_id) }}" class="btn btn-primary">
+        Подробнее о фильме <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

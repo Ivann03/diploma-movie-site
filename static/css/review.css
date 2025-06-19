@@ -1,0 +1,263 @@
+/* Review Page */
+.review-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* Full Review */
+.full-review {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 3rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.review-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.review-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.review-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.movie-title {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.review-date {
+  margin-left: auto;
+  opacity: 0.8;
+}
+
+.review-content {
+  color: var(--text-primary);
+  line-height: 1.7;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+.review-content p {
+  margin-bottom: 1.2rem;
+}
+
+.review-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rating-widget {
+  display: flex;
+  gap: 1rem;
+}
+
+.like-btn, .dislike-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.like-btn {
+  color: #00c853;
+}
+
+.dislike-btn {
+  color: #ff5252;
+}
+
+.like-btn:hover {
+  background: rgba(0, 200, 83, 0.1);
+}
+
+.dislike-btn:hover {
+  background: rgba(255, 82, 82, 0.1);
+}
+
+.count {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Comments Section */
+.comments-section {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.section-header {
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.section-title i {
+  color: var(--accent);
+}
+
+.comments-count {
+  background: var(--accent);
+  color: #000;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin-left: auto;
+}
+
+/* Comment Form */
+.comment-form {
+  margin-bottom: 2rem;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 1rem;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 100px;
+  transition: all 0.3s ease;
+}
+
+.comment-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(123, 77, 255, 0.3);
+  outline: none;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.submit-comment {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.submit-comment:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+.form-hint {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Comments List */
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.comment {
+  background: var(--bg-dark);
+  padding: 1.2rem;
+  border-radius: 8px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.comment-author {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.comment-author i {
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.comment-date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.comment-text {
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .review-title {
+    font-size: 1.5rem;
+  }
+
+  .review-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .review-date {
+    margin-left: 0;
+  }
+
+  .section-title {
+    flex-wrap: wrap;
+  }
+
+  .comments-count {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+  }
+}

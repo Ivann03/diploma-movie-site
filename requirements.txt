@@ -1,0 +1,7 @@
+Flask
+Flask_SQLAlchemy
+bcrypt
+scikit-learn
+pandas
+nltk
+sentence-transformers

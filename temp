@@ -1,0 +1,89 @@
+{% extends 'base_logged.html' %}
+
+{% block title %}
+    {{ movie.movie_title }} - Детали фильма
+{% endblock %}
+
+{% block content %}
+    <h1>{{ movie.movie_title }}</h1>
+    <h4>Рейтинг: {{ movie.movie_rating }}</h4>
+    <p>Дата выпуска: {{ movie.movie_date }}, Страна: {{ movie.movie_country }}, Жанр: {{ movie.movie_genre }}, Бюджет: {{movie.movie_budget}}, Сбор: {{movie.movie_box_office}}</p>
+    <div class="seperator"></div>
+    <h4>Описание:</h4>
+    <p>{{ movie.movie_description }}</p>
+    <p>
+        <span style="font-weight: 500; font-size: 20px;">Режиссёр:</span>
+        {% for director in directors %}
+            <a href="{{ url_for('person_detail', numb=director.director_id, type=1) }}">{{ director.director_name }}</a>
+        {% endfor %}
+    </p>
+    <p>
+        <span style="font-weight: 500; font-size: 20px;">Художник:</span>
+        {% for artist in artists %}
+            <p style="font-weight: lighter;">{{ artist.artist_name }}</p>
+        {% endfor %}
+    </p>
+    <p>
+        <span style="font-weight: 500; font-size: 20px;">Монтаж:</span>
+        {% for editor in editors %}
+            <p style="font-weight: lighter;">{{ editor.editor_name }}</p>
+        {% endfor %}
+    </p>
+    <p>
+        <span style="font-weight: 500; font-size: 20px;">Актёры:</span>
+        {% for actor in actors %}
+            <p style="font-weight: lighter;">{{ actor.actor_name }}</p>
+        {% endfor %}
+    </p>
+    <p>
+        <span style="font-weight: 500; font-size: 20px;">Композитор:</span>
+        {% for composer in composers %}
+            <p style="font-weight: lighter;">{{ composer.composer_name }}</p>
+        {% endfor %}
+    </p>
+    <p>
+        <span style="font-weight: 500; font-size: 20px;">Оператор:</span>
+        {% for cameraman in cameramen %}
+            <p style="font-weight: lighter;">{{ cameraman.cameraman_name }}</p>
+        {% endfor %}
+    </p>
+    <p>
+        <span style="font-weight: 500; font-size: 20px;">Сценарист:</span>
+        {% for screenwriter in screenwriters %}
+            <p style="font-weight: lighter;">{{ screenwriter.screenwriter_name }}</p>
+        {% endfor %}
+    </p>
+{% endblock %}
+
+
+
+
+
+
+@app.route('/search', methods=['POST','GET'])
+def search():
+    if 'loggedin' in session:
+        if session['loggedin']==True:
+            user_id=session['id']
+            username = Users.query.filter_by(user_id=user_id).first().username
+            if request.method == 'POST':
+                post_movie_title = request.form['movie_title']
+                title = Movies.query.filter_by(movie_title=post_movie_title).first()
+                if title!=None:
+                    return render_template('movie.html', movie=title,username=username,loggedin=True)
+                else:
+                    flash('фильм не найден')
+                    return render_template('search.html', movie=title,username=username,loggedin=True)
+            else:
+                return render_template('search.html', username=username,loggedin=True)
+    else:
+        if request.method == 'POST':
+            post_movie_title = request.form['movie_title']
+            title = Movies.query.filter_by(movie_title=post_movie_title).first()
+            if title != None:
+                return render_template('movie.html', movie=title,loggedin=True)
+            else:
+                flash('фильм не найден')
+                return render_template('search_not_found.html', movie=title,loggedin=False)
+        else:
+            return render_template('search.html',loggedin=False)

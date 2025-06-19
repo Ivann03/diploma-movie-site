@@ -1,0 +1,94 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+Рецензия на {{review.movie_title}} | Cinematica
+{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/review.css')}}">
+{% endblock %}
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='js/review.js') }}"></script>
+{% endblock %}
+{% block content %}
+<section class="review-page">
+  <!-- Основная рецензия -->
+  <article class="full-review">
+    <div class="review-header">
+      <h1 class="review-title">{{review.review_title}}</h1>
+      <div class="review-meta">
+        <span class="movie-title">«{{review.movie_title}}»</span>
+        <span class="review-author">Автор: {{review.reviewusername}}</span>
+      </div>
+    </div>
+
+    <div class="review-content">
+      {{review.review_text|safe}}
+    </div>
+
+    <div class="review-actions">
+  <div class="rating-widget">
+    <a href="#" class="like-btn" data-review-id="{{review.review_id}}" style="cursor: pointer; text-decoration: none; color: inherit;">
+      <i class="fas fa-thumbs-up"></i>
+      <span class="count">{{review.review_likes}}</span>
+    </a>
+    <a href="#" class="dislike-btn" data-review-id="{{review.review_id}}" style="cursor: pointer; text-decoration: none; color: inherit; margin-left: 10px;">
+      <i class="fas fa-thumbs-down"></i>
+      <span class="count">{{review.review_dislikes}}</span>
+    </a>
+  </div>
+</div>
+
+  </article>
+
+  <!-- Секция комментариев -->
+  <section class="comments-section">
+    <div class="section-header">
+      <h2 class="section-title">
+        <i class="fas fa-comments"></i>
+        <span>Обсуждение</span>
+        <span class="comments-count">{{comments|length}} комментариев</span>
+      </h2>
+    </div>
+
+    <!-- Форма добавления комментария -->
+    <form method="post" class="comment-form">
+      <div class="form-group">
+        <textarea name="comment_text"
+                  placeholder="Напишите ваш комментарий..."
+                  class="comment-input"
+                  rows="3"
+                  required></textarea>
+        <div class="form-footer">
+          <button type="submit" class="submit-comment">
+            <i class="fas fa-paper-plane"></i> Отправить
+          </button>
+          <div class="form-hint">Максимум 1000 символов</div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Список комментариев -->
+   <div class="comments-list">
+  {% for comment in comments %}
+  <div class="comment">
+    <div class="comment-header">
+      <div class="comment-author">
+        <i class="fas fa-user-circle"></i>
+        <span>{{comment.comment_username}}</span>
+      </div> <!-- закрываем comment-author -->
+    </div> <!-- закрываем comment-header -->
+
+    <div class="comment-text">
+      {{comment.comment_text}}
+    </div>
+  </div> <!-- закрываем comment -->
+  {% endfor %}
+</div>
+
+  </section>
+</section>
+{% endblock %}

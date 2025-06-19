@@ -1,0 +1,57 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+Новая рецензия | Cinematica
+{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reviews_post_success.css')}}">
+{% endblock %}
+{% block content %}
+<section class="compact-review-form">
+  <div class="form-container">
+    <h1 class="form-header">
+      <i class="fas fa-edit"></i> Новая рецензия
+    </h1>
+
+    <form method="post" class="review-form">
+      <div class="input-group">
+        <input type="text"
+               name="movie_title"
+               placeholder="Название фильма"
+               class="form-input"
+               required>
+      </div>
+
+      <div class="input-group">
+        <input type="text"
+               name="review_title"
+               placeholder="Заголовок рецензии"
+               class="form-input"
+               required>
+      </div>
+
+      <div class="input-group">
+        <textarea name="review_text"
+                  placeholder="Текст вашей рецензии..."
+                  class="form-textarea"
+                  rows="4"
+                  required></textarea>
+      </div>
+
+      {% if message %}
+      <div class="form-message success">
+        <i class="fas fa-check-circle"></i> {{ message }}
+      </div>
+      {% endif %}
+
+      <button type="submit" class="submit-btn">
+        <i class="fas fa-paper-plane"></i> Опубликовать
+      </button>
+    </form>
+  </div>
+</section>
+{% endblock %}

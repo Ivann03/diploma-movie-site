@@ -1,0 +1,245 @@
+/* Базовые цвета */
+:root {
+    --bg-dark: #0A0A0F;
+    --bg-secondary: #151520;
+    --accent: #7B4DFF;
+    --accent-hover: #936DFF;
+    --text-primary: #F0F0F0;
+    --text-secondary: #B0B0B0;
+    --border-color: #252535;
+}
+
+/* Общие стили */
+.dark-theme {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Хедер (компактный) */
+.site-header {
+    background: var(--bg-secondary);
+    padding: 0.8rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+}
+
+.site-logo {
+    height: 36px;
+    width: 36px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.logo-text {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+/* Навигация (иконки) */
+.main-nav {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent);
+    background: rgba(123, 77, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Кнопки авторизации */
+.auth-buttons {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.btn-login, .btn-register {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.btn-login {
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
+.btn-register {
+    color: #000;
+    background: var(--accent);
+}
+
+.btn-login:hover {
+    background: rgba(123, 77, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.btn-register:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+/* Основной контент */
+.main-content {
+    flex: 1;
+    padding: 2rem 0;
+}
+
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Футер (компактный) */
+.site-footer {
+    background: var(--bg-secondary);
+    padding: 1.2rem 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+}
+
+.copyright {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-link {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--accent);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .header-container, .footer-container {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .logo-text {
+        display: none;
+    }
+}
+
+/* Стили для панели пользователя */
+.user-panel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.user-profile i {
+    font-size: 1.2rem;
+    color: var(--accent);
+}
+
+.username_base {
+    font-size: 0.9rem;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-logout {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .username_base {
+        display: none;
+    }
+
+    .user-panel {
+        gap: 0.5rem;
+    }
+}

@@ -1,0 +1,57 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+Точный поиск фильмов | Cinematica
+{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css')}}">
+{% endblock %}
+{% block content %}
+<section class="exact-search-section">
+  <div class="search-header">
+    <div class="search-icon-wrapper">
+      <i class="fas fa-search-location"></i>
+    </div>
+    <h1 class="search-title">Поиск фильмов</h1>
+    <p class="search-subtitle">Введите полное название фильма для поиска</p>
+  </div>
+
+  <div class="exact-search-container">
+    <form method="post" class="exact-search-form">
+      <div class="input-wrapper">
+        <input type="text"
+               name="movie_title"
+               placeholder="Например: 'Побег из Шоушенка'"
+               class="exact-search-input"
+               required
+               pattern=".*\S+.*"
+               title="Пожалуйста, введите полное название фильма">
+        <button type="submit" class="exact-search-button">
+          <i class="fas fa-search"></i>
+          <span>Найти</span>
+        </button>
+      </div>
+
+      {% if msg %}
+      <div class="exact-search-error">
+        <i class="fas fa-exclamation-triangle"></i>
+        <div class="error-message">
+          <strong>Не найдено:</strong> {{msg}}
+          <div class="error-hint">Проверьте точность написания названия</div>
+        </div>
+      </div>
+      {% endif %}
+    </form>
+
+    <div class="exact-search-notice">
+      <i class="fas fa-info-circle"></i>
+      <p>Поиск работает только по <strong>полным и точным</strong> названиям фильмов.
+      Для расширенного поиска посетите страницу <a href="{{ url_for('popular')}}">каталога</a>.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

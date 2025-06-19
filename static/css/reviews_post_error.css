@@ -1,0 +1,140 @@
+/* New Review Section */
+.new-review {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.review-container {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.review-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.review-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.review-title i {
+  color: var(--accent);
+}
+
+.review-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Review Form */
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-input {
+  padding: 1rem;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(123, 77, 255, 0.3);
+  outline: none;
+}
+
+.form-textarea {
+  min-height: 200px;
+  resize: vertical;
+}
+
+/* Message */
+.review-message {
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.95rem;
+}
+
+.review-message.error {
+  background: rgba(255, 72, 72, 0.1);
+  color: #ff4848;
+}
+
+.review-message i {
+  font-size: 1.1rem;
+}
+
+/* Submit Button */
+.submit-btn {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+}
+
+.submit-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(123, 77, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .review-container {
+    padding: 1.5rem;
+  }
+
+  .review-title {
+    font-size: 1.5rem;
+  }
+
+  .submit-btn {
+    max-width: 100%;
+  }
+}

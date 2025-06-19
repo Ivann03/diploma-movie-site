@@ -1,0 +1,74 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+Рецензии на фильмы | Cinematica
+{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reviews.css')}}">
+{% endblock %}
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='js/reviews.js') }}"></script>
+{% endblock %}
+{% block content %}
+<section class="reviews-section">
+  <div class="section-header">
+    <h1 class="section-title_2">Рецензии кинокритиков</h1>
+    <p class="section-subtitle">Мнения и анализ фильмов от наших пользователей</p>
+    <a href="{{ url_for('reviews_post') }}" class="new-review-btn">
+      <i class="fas fa-plus"></i>
+      <span>Написать рецензию</span>
+    </a>
+  </div>
+
+  <div class="reviews-grid">
+    {% for review in reviews %}
+    <article class="review-card">
+      <div class="review-header">
+        <a href="{{url_for('review', review_id=review.review_id)}}" class="review-title-link">
+          <h2 class="review-title">{{review.review_title}}</h2>
+        </a>
+        <div class="review-meta">
+          <span class="movie-title">«{{review.movie_title}}»</span>
+          <span class="review-author">Автор: {{review.reviewusername}}</span>
+        </div>
+      </div>
+
+      <div class="review-excerpt">
+        {% if review.review_text|length > 300 %}
+          <p>{{review.review_text[:300]}}...</p>
+        {% else %}
+          <p>{{review.review_text}}</p>
+        {% endif %}
+      </div>
+
+      <div class="review-footer">
+        <a href="{{url_for('review', review_id=review.review_id)}}" class="read-more">
+          Читать полностью <i class="fas fa-chevron-right"></i>
+        </a>
+
+        <div class="review-actions" style="margin-top: 10px;">
+          <a href="#"
+             class="like-btn"
+             data-review-id="{{review.review_id}}"
+             style="display: inline-flex; align-items: center; gap: 5px; margin-right: 15px; text-decoration: none; color: inherit;">
+            <i class="fas fa-thumbs-up"></i>
+            <span class="count">{{review.review_likes}}</span>
+          </a>
+          <a href="#"
+             class="dislike-btn"
+             data-review-id="{{review.review_id}}"
+             style="display: inline-flex; align-items: center; gap: 5px; text-decoration: none; color: inherit;">
+            <i class="fas fa-thumbs-down"></i>
+            <span class="count">{{review.review_dislikes}}</span>
+          </a>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

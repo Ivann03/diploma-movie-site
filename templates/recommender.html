@@ -1,0 +1,132 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+Рекомендации | Cinematica
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/recommendations.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .collections-nav {
+      margin: 1rem 0 2rem;
+      padding: 1rem;
+      background: var(--bg-secondary);
+      border-radius: 10px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .nav-title {
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .nav-links li a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      background: var(--bg-tertiary);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .nav-links li a:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<section class="recommendations-section">
+  <div class="recommendations-container">
+
+    <!-- Персональные рекомендации -->
+    <h1 class="page-title"><i class="fas fa-star"></i> Персональные рекомендации</h1>
+
+    {% if thematic_collections %}
+      <nav class="collections-nav">
+        <h2 class="nav-title">Перейти к подборке:</h2>
+        <ul class="nav-links">
+          {% for collection_name in thematic_collections.keys() %}
+            <li><a href="#{{ collection_name|replace(' ', '_') }}">{{ collection_name }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    {% endif %}
+
+    {% if recommended_movies %}
+      <div class="movies-grid">
+        {% for movie in recommended_movies %}
+          <div class="movie-card scale-on-hover">
+            <div class="movie-header">
+              <h3 class="movie-title">{{ movie.movie_title }}</h3>
+              <span class="movie-year">{{ movie.movie_date }}</span>
+            </div>
+            <div class="movie-info">
+              <p class="movie-description">
+                {{ movie.movie_description[:200] }}{% if movie.movie_description|length > 200 %}...{% endif %}
+              </p>
+            </div>
+            <div class="movie-footer">
+              <a href="{{ url_for('movie_detail', movie_id=movie.movie_id) }}" class="btn-primary">
+                Подробнее <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <i class="fas fa-info-circle"></i>
+        <h3>Рекомендаций пока нет</h3>
+        <p>Попробуйте добавить фильмы в избранное или написать рецензии, чтобы получить рекомендации</p>
+      </div>
+    {% endif %}
+
+    <!-- Тематические подборки -->
+    {% for collection_name, movies in thematic_collections.items() %}
+      <h1 class="page-title" id="{{ collection_name|replace(' ', '_') }}">
+        <i class="fas fa-folder-open"></i> {{ collection_name }}
+      </h1>
+      <div class="movies-grid">
+        {% for movie in movies %}
+          <div class="movie-card scale-on-hover">
+            <div class="movie-header">
+              <h3 class="movie-title">{{ movie.movie_title }}</h3>
+              <span class="movie-year">{{ movie.movie_date }}</span>
+            </div>
+            <div class="movie-info">
+              <p class="movie-description">
+                {{ movie.movie_description[:200] }}{% if movie.movie_description|length > 200 %}...{% endif %}
+              </p>
+            </div>
+            <div class="movie-footer">
+              <a href="{{ url_for('movie_detail', movie_id=movie.movie_id) }}" class="btn-primary">
+                Подробнее <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

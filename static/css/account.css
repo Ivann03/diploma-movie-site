@@ -1,0 +1,492 @@
+/* Обновленные стили для темной темы */
+:root {
+  --primary: #6c5ce7;
+  --primary-hover: #7d6df0;
+  --primary-light: rgba(108, 92, 231, 0.1);
+  --text-primary: #f8f9fa;
+  --text-secondary: #adb5bd;
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --bg-tertiary: #2d2d2d;
+  --bg-card: #252525;
+  --border-color: #3a3a3a;
+  --success: #00b894;
+  --danger: #ff7675;
+  --warning: #fdcb6e;
+  --like: #55efc4;
+  --dislike: #ff7675; /* Используем это значение для dislikes */
+  --comment: #74b9ff;
+  --card-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  --card-glow: 0 0 15px rgba(108, 92, 231, 0.3);
+}
+
+/* Анимации */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes glow {
+  0% { box-shadow: var(--card-shadow); }
+  50% { box-shadow: var(--card-glow); }
+  100% { box-shadow: var(--card-shadow); }
+}
+
+/* Базовые стили */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Добавлено для лучшего контроля над размерами */
+}
+
+/* Account Section */
+.account-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  background: var(--bg-primary);
+  min-height: 100vh;
+}
+
+.account-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Общие стили карточек */
+.profile-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  animation: glow 2s infinite;
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.avatar-placeholder {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--bg-tertiary), var(--primary-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  font-size: 3.5rem;
+  border: 2px solid var(--primary);
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+.username_profile {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(to right, var(--primary), var(--like));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.user-email {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.user-email i {
+  color: var(--primary);
+}
+
+/* Формы */
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  flex: 1;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  opacity: 0.7;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.85rem 1rem 0.85rem 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* Кнопки */
+.btn-save {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.85rem 2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-save:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-save:active {
+  transform: translateY(0);
+}
+
+
+/* --- Новые стили для секции "Ваши рецензии" --- */
+
+.reviews-section .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem; /* Отступ между заголовком и сеткой рецензий */
+}
+
+.reviews-section .section-header h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem; /* Отступ между иконкой и текстом */
+}
+
+.reviews-section .section-header h2 i {
+  color: var(--primary); /* Цвет иконки пера */
+  font-size: 1.6rem;
+}
+
+.count-badge {
+  background: var(--primary);
+  color: white;
+  padding: 0.3em 0.7em;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  display: inline-block; /* Для корректного позиционирования */
+}
+
+.btn-new-review {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none; /* Убрать подчеркивание для ссылки-кнопки */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-new-review:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-new-review:active {
+  transform: translateY(0);
+}
+
+/* Секция с фильмами */
+.movies-section {
+  background: linear-gradient(to bottom, var(--bg-card), var(--bg-secondary));
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.8rem;
+}
+
+.movie-card {
+  background: var(--bg-tertiary);
+  border-radius: 12px;
+  padding: 1.8rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.scale-on-hover:hover {
+  transform: scale(1.03);
+}
+
+.movie-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+}
+
+.movie-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.movie-year {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.movie-description {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.movie-footer .btn-primary {
+  width: 100%;
+  text-align: center;
+  padding: 0.7rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Стили для сетки рецензий */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* От 300px, чтобы было адаптивно */
+  gap: 1.5rem; /* Отступы между карточками рецензий */
+}
+
+/* Стили для отдельной карточки рецензии */
+.review-card {
+  background: var(--bg-secondary); /* Чуть светлее, чем основной фон карточки */
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  display: flex; /* Для равномерного распределения контента */
+  flex-direction: column;
+  justify-content: space-between; /* Прижать футер вниз */
+  min-height: 220px; /* Минимальная высота для единообразия */
+}
+
+.review-card.scale-on-hover:hover {
+  transform: translateY(-5px); /* Более заметный подъем при наведении */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.review-header {
+  margin-bottom: 1rem;
+}
+
+.review-header .movie-title {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.review-header .review-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: block; /* Чтобы ссылка занимала всю ширину */
+  transition: color 0.2s ease;
+}
+
+.review-header .review-title:hover {
+  color: var(--primary); /* Изменение цвета при наведении на заголовок рецензии */
+}
+
+.review-excerpt {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  flex-grow: 1; /* Чтобы текст занимал доступное пространство */
+}
+
+.review-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem; /* Отступ от текста рецензии */
+  border-top: 1px solid var(--border-color); /* Разделитель */
+  margin-top: 1rem;
+}
+
+.review-stats {
+  display: flex;
+  gap: 1.2rem; /* Отступ между показателями */
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.review-stats span {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.review-stats .likes i {
+  color: var(--like);
+}
+
+.review-stats .dislikes i {
+  color: var(--dislike); /* Используем --dislike, которое вы определили */
+}
+
+.review-stats .comments i {
+  color: var(--comment);
+}
+
+.read-more {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.read-more:hover {
+  color: var(--primary-hover);
+  transform: translateX(3px); /* Небольшое смещение при наведении */
+}
+
+/* Стили для пустого состояния рецензий */
+.reviews-section .empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px dashed var(--border-color); /* Пунктирная граница для пустого состояния */
+  color: var(--text-secondary);
+}
+
+.reviews-section .empty-state i {
+  font-size: 4rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.reviews-section .empty-state h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-primary);
+}
+
+.reviews-section .empty-state p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .reviews-section .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .btn-new-review {
+    width: 100%; /* Кнопка на всю ширину на мобильных */
+    justify-content: center;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr; /* Одна колонка на мобильных */
+  }
+
+  .review-card {
+    min-height: auto; /* Отменить минимальную высоту */
+  }
+}

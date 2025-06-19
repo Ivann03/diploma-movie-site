@@ -1,0 +1,213 @@
+/* Movies Header */
+.movies-header {
+  background: var(--bg-secondary);
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+  border-radius: 0 0 20px 20px;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.sorting-options {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.sorting-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.sorting-title i {
+  color: var(--accent);
+}
+
+.sorting-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.sort-btn {
+  background: rgba(123, 77, 255, 0.1);
+  color: var(--accent);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.sort-btn:hover {
+  background: rgba(123, 77, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Movies Grid */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.movie-card {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.movie-poster {
+  height: 200px;
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
+}
+
+.rating-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.5rem 0.8rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 600;
+  color: #ffd700;
+}
+
+.movie-info {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.movie-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.meta-item i {
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+.movie-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.movie-link {
+  color: var(--accent);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.movie-link:hover {
+  gap: 1rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .movies-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sorting-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sort-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.movie-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movie-title_2 {
+  font-size: 1.5rem; /* или 1.75rem / 24px — на твой вкус */
+  font-weight: bold;
+  margin: 0 0 12px 0; /* отступ снизу 12px, можешь увеличить */
+}
+
+
+.favorite-icon {
+  font-size: 1.5rem;
+  color: #ccc; /* серый цвет по умолчанию */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.favorite-icon:hover {
+  color: #e74c3c; /* красная рамка/цвет при наведении */
+}
+
+.favorite-icon.active {
+  color: #e74c3c; /* красное сердце, когда активно */
+}
+
+

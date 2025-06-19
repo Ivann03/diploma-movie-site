@@ -1,0 +1,93 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+Cinematica | Ваш киногид
+{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css')}}">
+{% endblock %}
+{% block content %}
+<section class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Откройте мир кино заново</h1>
+    <p class="hero-subtitle">Персонализированные рекомендации и эксклюзивные рецензии</p>
+    <div class="hero-buttons">
+      <a href="{{ url_for('popular')}}" class="hero-btn primary-btn">
+        <i class="fas fa-fire"></i> Узнать о популярных фильмах
+      </a>
+      <a href="{{ url_for('search')}}" class="hero-btn outline-btn">
+        <i class="fas fa-search"></i> Найти фильм
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="features-section">
+  <div class="section-header">
+    <h2 class="section-title">Что вы можете делать на Cinematica</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon-wrapper">
+        <i class="fas fa-book-open"></i>
+      </div>
+      <h3 class="feature-title">Исследовать кино</h3>
+      <p class="feature-text">Открывайте для себя подробную информацию о фильмах, актерах и командах.</p>
+      <a href="{{ url_for('popular')}}" class="feature-link">
+        Изучить популярные фильмы <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon-wrapper">
+        <i class="fas fa-pen-nib"></i>
+      </div>
+      <h3 class="feature-title">Писать рецензии</h3>
+      <p class="feature-text">Делитесь своим мнением о фильмах, создавая собственные обзоры.</p>
+      <a href="{{ url_for('reviews')}}" class="feature-link">
+        Написать рецензию <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon-wrapper">
+        <i class="fas fa-users"></i>
+      </div>
+      <h3 class="feature-title">Читать мнения других</h3>
+      <p class="feature-text">Оценивайте и обсуждайте фильмы с другими кинолюбителями.</p>
+      <a href="{{ url_for('reviews')}}" class="feature-link">
+        Читать рецензии <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-content">
+    {% if not loggedin %}
+      <h2 class="cta-title">Присоединяйтесь к сообществу Cinematica</h2>
+      <p class="cta-text">Обсуждайте кино, делитесь открытиями и вдохновляйтесь новыми идеями.</p>
+      <div class="cta-buttons">
+        <a href="{{ url_for('register') }}" class="cta-btn">
+          <i class="fas fa-user-plus"></i> Стать частью сообщества
+        </a>
+      </div>
+    {% else %}
+      <h2 class="cta-title">Ваши персональные рекомендации уже ждут</h2>
+      <p class="cta-text">Мы подобрали фильмы специально для вас на основе ваших любимых.</p>
+      <div class="cta-buttons">
+        <a href="{{ url_for('recommender') }}" class="cta-btn">
+          <i class="fas fa-film"></i> Смотреть рекомендации
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+

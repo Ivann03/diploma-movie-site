@@ -1,0 +1,49 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+{{ name }} | Cinematica
+{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/person_detail.css')}}">
+{% endblock %}
+{% block content %}
+<section class="person-detail">
+  <div class="person-header">
+    <div class="person-photo">
+      <!-- Заглушка для фото, можно заменить на реальное изображение -->
+      <div class="photo-placeholder">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+
+    <div class="person-info">
+      <h1 class="person-name">{{ name }}</h1>
+      <div class="person-profession">{{ upper }}</div>
+
+      {% if movies %}
+      <div class="best-works">
+        <h3 class="section-title">
+          <i class="fas fa-trophy"></i> Лучшие работы
+        </h3>
+        <div class="movies-list">
+          {{ movies }}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="person-biography">
+    <h3 class="section-title">
+      <i class="fas fa-book-open"></i> Биография
+    </h3>
+    <div class="bio-content">
+      {{ biography }}
+    </div>
+  </div>
+</section>
+{% endblock %}

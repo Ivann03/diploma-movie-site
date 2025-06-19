@@ -1,0 +1,17 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+Поиск
+{% endblock %}
+{% block content %}
+<h1>Фильм по вашему запросу не был найден</h1>
+<form method="post" class="form-control">
+    <input type="text" name="movie_title" placeholder="Введите название фильма" class="form-control"><br>
+    <button class="btn btn-primary" type="submit">Найти фильм</button>
+</form>
+<a href="/">На главную</a>
+{% endblock %}

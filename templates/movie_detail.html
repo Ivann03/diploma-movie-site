@@ -1,0 +1,137 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+{{ movie.movie_title }} | Cinematica
+{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/movie_detail.css')}}">
+{% endblock %}
+{% block content %}
+<section class="movie-detail">
+  <div class="movie-header">
+    <div class="movie-poster">
+      <div class="poster-placeholder">
+        <i class="fas fa-film"></i>
+      </div>
+    </div>
+
+    <div class="movie-info">
+      <h1 class="movie-title">{{ movie.movie_title }}</h1>
+
+      <div class="movie-meta">
+        <div class="rating-badge">
+          <i class="fas fa-star"></i>
+          <span>{{ movie.movie_rating }}</span>
+        </div>
+
+        <span class="meta-item"><i class="fas fa-calendar-alt"></i> {{ movie.movie_date }}</span>
+        <span class="meta-item"><i class="fas fa-globe"></i> {{ movie.movie_country }}</span>
+        <span class="meta-item"><i class="fas fa-tag"></i> {{ movie.movie_genre }}</span>
+      </div>
+
+      <div class="movie-finance">
+        <div class="finance-item">
+          <span class="finance-label">Бюджет:</span>
+          <span class="finance-value">{{ movie.movie_budget }}</span>
+        </div>
+        <div class="finance-item">
+          <span class="finance-label">Сборы:</span>
+          <span class="finance-value">{{ movie.movie_box_office }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="movie-description">
+    <h3 class="section-title">Описание</h3>
+    <p>{{ movie.movie_description }}</p>
+  </div>
+
+  <div class="movie-team">
+    <h3 class="section-title">Создатели фильма</h3>
+
+    <div class="team-grid">
+      <div class="team-category">
+        <h4 class="team-title"><i class="fas fa-video"></i> Режиссёры</h4>
+        <div class="team-list">
+          {% for director in directors %}
+            <a href="{{ url_for('person_detail', numb=director.director_id, type=1) }}" class="team-member">
+              {{ director.director_name }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="team-category">
+        <h4 class="team-title"><i class="fas fa-paint-brush"></i> Художники</h4>
+        <div class="team-list">
+          {% for artist in artists %}
+            <a href="{{ url_for('person_detail', numb=artist.artist_id, type=2) }}" class="team-member">
+              {{ artist.artist_name }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="team-category">
+        <h4 class="team-title"><i class="fas fa-cut"></i> Монтаж</h4>
+        <div class="team-list">
+          {% for editor in editors %}
+            <a href="{{ url_for('person_detail', numb=editor.editor_id, type=3) }}" class="team-member">
+              {{ editor.editor_name }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="team-category">
+        <h4 class="team-title"><i class="fas fa-users"></i> Актёры</h4>
+        <div class="team-list">
+          {% for actor in actors %}
+            <a href="{{ url_for('person_detail', numb=actor.actor_id, type=4) }}" class="team-member">
+              {{ actor.actor_name }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="team-category">
+        <h4 class="team-title"><i class="fas fa-music"></i> Композиторы</h4>
+        <div class="team-list">
+          {% for composer in composers %}
+            <a href="{{ url_for('person_detail', numb=composer.composer_id, type=5) }}" class="team-member">
+              {{ composer.composer_name }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="team-category">
+        <h4 class="team-title"><i class="fas fa-camera"></i> Операторы</h4>
+        <div class="team-list">
+          {% for cameraman in cameramen %}
+            <a href="{{ url_for('person_detail', numb=cameraman.cameraman_id, type=6) }}" class="team-member">
+              {{ cameraman.cameraman_name }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="team-category">
+        <h4 class="team-title"><i class="fas fa-pen-fancy"></i> Сценаристы</h4>
+        <div class="team-list">
+          {% for screenwriter in screenwriters %}
+            <a href="{{ url_for('person_detail', numb=screenwriter.screenwriter_id, type=7) }}" class="team-member">
+              {{ screenwriter.screenwriter_name }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

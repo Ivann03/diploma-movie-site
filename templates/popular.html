@@ -1,0 +1,94 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+Популярные фильмы | Cinematica
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/popular.css')}}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='js/popular.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<section class="movies-header">
+  <div class="header-content">
+    <h1 class="page-title">Коллекция фильмов</h1>
+    <p class="page-subtitle">Лучшие кинокартины со всего мира</p>
+
+    <div class="sorting-options">
+      <div class="sorting-title">
+        <i class="fas fa-sort"></i>
+        <span>Сортировка:</span>
+      </div>
+      <div class="sorting-buttons">
+        <a href="?sort_by=movie_rating&order=desc" class="sort-btn" data-sort="rating-desc">
+          <i class="fas fa-star"></i>
+          <span>По рейтингу</span>
+          <i class="sort-direction fas fa-arrow-down-wide-short"></i>
+        </a>
+        <a href="?sort_by=movie_rating&order=asc" class="sort-btn" data-sort="rating-asc">
+          <i class="fas fa-star"></i>
+          <span>По рейтингу</span>
+          <i class="sort-direction fas fa-arrow-up-wide-short"></i>
+        </a>
+        <a href="?sort_by=movie_date&order=desc" class="sort-btn" data-sort="date-desc">
+          <i class="fas fa-calendar-alt"></i>
+          <span>По дате (новые)</span>
+          <i class="sort-direction fas fa-arrow-down-wide-short"></i>
+        </a>
+        <a href="?sort_by=movie_date&order=asc" class="sort-btn" data-sort="date-asc">
+          <i class="fas fa-calendar-alt"></i>
+          <span>По дате (старые)</span>
+          <i class="sort-direction fas fa-arrow-up-wide-short"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="movies-grid">
+  {% for movie in popular %}
+  <div class="movie-card" data-movie-id="{{ movie.movie_id }}">
+    <div class="movie-poster">
+      <div class="rating-badge">
+        <i class="fas fa-star"></i>
+        <span>{{movie.movie_rating}}</span>
+      </div>
+    </div>
+
+    <div class="movie-info">
+      <div class="movie-title-container">
+          <h3 class="movie-title_2">{{ movie.movie_title }}</h3>
+          <i class="favorite-icon fa-heart {% if movie.movie_id in liked_movie_ids %}fas active{% else %}far{% endif %}"
+             onclick="toggleFavorite(this, {{ 'true' if loggedin else 'false' }}, {{ movie.movie_id }})"></i>
+      </div>
+      <div class="movie-meta">
+        <span class="meta-item">
+          <i class="fas fa-calendar"></i> {{movie.movie_date}}
+        </span>
+        <span class="meta-item">
+          <i class="fas fa-globe"></i> {{movie.movie_country}}
+        </span>
+        <span class="meta-item">
+          <i class="fas fa-tag"></i> {{movie.movie_genre}}
+        </span>
+      </div>
+
+      <p class="movie-description">{{movie.movie_description}}</p>
+
+      <a href="{{ url_for('movie', movie_id=movie.movie_id) }}" class="movie-link">
+        Подробнее <i class="fas fa-chevron-right"></i>
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}

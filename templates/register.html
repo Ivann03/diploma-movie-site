@@ -1,0 +1,66 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+Регистрация | Cinematica
+{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css')}}">
+{% endblock %}
+{% block content %}
+<section class="auth-section">
+  <div class="auth-container">
+    <div class="auth-header">
+      <h1 class="auth-title">Регистрация на сайте</h1>
+    </div>
+
+    <form method="post" class="auth-form">
+      <div class="form-group">
+        <input type="text"
+               name="username"
+               placeholder="Введите логин"
+               class="form-input"
+               required
+               autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <input type="text"
+               name="email"
+               placeholder="Введите почту"
+               class="form-input"
+               required
+               autocomplete="email">
+      </div>
+
+      <div class="form-group">
+        <input type="password"
+               name="password"
+               placeholder="Введите пароль"
+               class="form-input"
+               required
+               autocomplete="new-password">
+      </div>
+
+      {% if msg %}
+      <div class="auth-error">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>{{ msg }}</span>
+      </div>
+      {% endif %}
+
+      <button type="submit" class="auth-submit">
+        Зарегистрироваться
+      </button>
+
+      <div class="auth-footer">
+        <span>Уже есть аккаунт?</span>
+        <a href="{{ url_for('login') }}" class="auth-link">Войти</a>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,192 @@
+{% if loggedin %}
+  {% extends 'base_logged.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}
+Личный кабинет | Cinematica
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css')}}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<section class="account-section">
+  <div class="account-container">
+    <!-- User Profile Section -->
+    <div class="profile-card glow-on-hover">
+      <div class="profile-header">
+        <div class="avatar-placeholder pulse-animation">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="profile-info">
+          <h1 class="username_profile">{{username}}</h1>
+          <div class="user-email">
+            <i class="fas fa-envelope"></i>
+            <span>{{ email }}</span>
+          </div>
+        </div>
+      </div>
+
+      <form method="post" class="name-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first_name">Имя</label>
+            <input type="text" id="first_name" name="first_name" value="{{ first_name }}" placeholder="Введите имя">
+          </div>
+          <div class="form-group">
+            <label for="last_name">Фамилия</label>
+            <input type="text" id="last_name" name="last_name" value="{{ last_name }}" placeholder="Введите фамилию">
+          </div>
+        </div>
+        <button type="submit" class="btn-save">
+          <i class="fas fa-save"></i> Сохранить изменения
+        </button>
+      </form>
+
+      {% if msg %}
+      <div class="alert-success slide-in">
+        <i class="fas fa-check-circle"></i> {{ msg }}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Change Password Section -->
+    <div class="profile-card change-password-card glow-on-hover">
+      <h2 class="section-title">
+        <i class="fas fa-key"></i> Смена пароля
+      </h2>
+
+      <form method="post" class="password-form">
+        <div class="form-group">
+          <label for="current_password">Текущий пароль</label>
+          <div class="input-with-icon">
+            <input type="password" id="current_password" name="current_password" placeholder="Введите текущий пароль" required>
+            <i class="fas fa-lock"></i>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="new_password">Новый пароль</label>
+          <div class="input-with-icon">
+            <input type="password" id="new_password" name="new_password" placeholder="Введите новый пароль" required>
+            <i class="fas fa-key"></i>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">Подтвердите новый пароль</label>
+          <div class="input-with-icon">
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Повторите новый пароль" required>
+            <i class="fas fa-check-circle"></i>
+          </div>
+        </div>
+        <button type="submit" class="btn-save">
+          <i class="fas fa-save"></i> Изменить пароль
+        </button>
+      </form>
+
+      {% if password_msg %}
+      <div class="alert-msg slide-in" style="--alert-color: {% if 'ошибка' in password_msg.lower() or 'неверно' in password_msg.lower() %}var(--danger){% else %}var(--success){% endif %};">
+        <i class="fas {% if 'ошибка' in password_msg.lower() or 'неверно' in password_msg.lower() %}fa-times-circle{% else %}fa-check-circle{% endif %}"></i>
+        {{ password_msg }}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Favorite Movies Section -->
+    <div class="profile-card movies-section glow-on-hover">
+      <h2 class="section-title">
+        <i class="fas fa-heart"></i> Избранные фильмы
+        <span class="count-badge">{{favorite_movies|length}}</span>
+      </h2>
+
+      {% if favorite_movies %}
+      <div class="movies-grid">
+        {% for movie in favorite_movies %}
+        <div class="movie-card scale-on-hover">
+          <div class="movie-header">
+            <h3 class="movie-title">{{ movie.movie_title }}</h3>
+            <span class="movie-year">{{ movie.movie_date }}</span>
+          </div>
+          <div class="movie-info">
+            <p class="movie-description">{{ movie.movie_description[:200] }}{% if movie.movie_description|length > 200 %}...{% endif %}</p>
+          </div>
+          <div class="movie-footer">
+            <a href="{{ url_for('movie_detail', movie_id=movie.movie_id) }}" class="btn-primary">
+              Подробнее <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-state">
+        <i class="fas fa-film"></i>
+        <h3>Нет избранных фильмов</h3>
+        <p>Добавляйте фильмы в избранное, чтобы они отображались здесь</p>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="profile-card reviews-section glow-on-hover">
+      <div class="section-header">
+        <h2>
+          <i class="fas fa-pen"></i> Ваши рецензии
+          <span class="count-badge">{{reviews|length}}</span>
+        </h2>
+        <a href="{{url_for('reviews_post')}}" class="btn-new-review">
+          <i class="fas fa-plus"></i> Новая рецензия
+        </a>
+      </div>
+
+      {% if reviews %}
+      <div class="reviews-grid">
+        {% for review in reviews %}
+        <div class="review-card scale-on-hover">
+          <div class="review-header">
+            <div class="movie-title">«{{review.movie_title}}»</div>
+            <a href="{{url_for('review', review_id=review.review_id)}}" class="review-title">
+              {{review.review_title}}
+            </a>
+          </div>
+
+          <div class="review-excerpt">
+            {{review.review_text[:300]}}{% if review.review_text|length > 300 %}...{% endif %}
+          </div>
+
+          <div class="review-footer">
+            <div class="review-stats">
+              <span class="likes">
+                <i class="fas fa-thumbs-up"></i> {{review.review_likes}}
+              </span>
+              <span class="dislikes">
+                <i class="fas fa-thumbs-down"></i> {{review.review_dislikes}}
+              </span>
+              <span class="comments">
+                <i class="fas fa-comment"></i> {{review.comments_count}}
+              </span>
+            </div>
+            <a href="{{url_for('review', review_id=review.review_id)}}" class="read-more">
+              Читать <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-state">
+        <i class="fas fa-comment-slash"></i>
+        <h3>Рецензий пока нет</h3>
+        <p>Напишите свою первую рецензию и поделитесь мнением о фильме</p>
+        <a href="{{url_for('reviews_post')}}" class="btn-primary">
+          Написать рецензию
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
